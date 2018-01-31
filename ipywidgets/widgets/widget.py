@@ -391,7 +391,7 @@ class Widget(LoggingConfigurable):
         name = change['name']
         if self.comm is not None and self.comm.kernel is not None:
             # Make sure this isn't information that the front-end just sent us.
-            if name in self.keys and self._should_send_property(name, change['new']):
+            if name in self.keys and self._should_send_property(name, getattr(self, name)):
                 # Send new state to front-end
                 self.send_state(key=name)
         LoggingConfigurable.notify_change(self, change)
